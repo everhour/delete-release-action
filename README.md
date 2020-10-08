@@ -15,7 +15,7 @@ No output
 ## Example usage
 
 ```yml
-uses: everhour/delete-release-action@v1
+uses: everhour/delete-release-action@v2.0.0
 with:
   tag_name: ${{ github.ref }}
 ```
