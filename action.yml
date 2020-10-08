@@ -1,14 +1,10 @@
-name: 'Delete Release'
-description: 'Delete a Release by its Name'
+name: 'Delete Release & Tag'
+description: 'Delete release and corresponding tag by tag name'
 inputs:
-  release-name:  # id of input
-    description: 'name of the release to delete'
-    required: true
-    default: 'example-release'
-  token:  # github token should be pulled from a secret
-    description: 'github token should be pulled from a secret'
-    required: true
-    default: ''
+    tag_name:
+        description: 'Tag name'
+        required: true
+        default: 'issue-1234'
 runs:
-  using: 'node12'
-  main: 'index.js'
+    using: 'node12'
+    main: 'index.js'
