@@ -19,3 +19,9 @@ uses: everhour/delete-release-action@v2.0.0
 with:
   tag_name: ${{ github.ref }}
 ```
+
+## Test
+
+```bash
+GITHUB_TOKEN=your-token GITHUB_REPOSITORY=everhour/some-repo INPUT_TAG_NAME=issue-1234 node index.js
+```
