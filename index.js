@@ -1,18 +1,17 @@
 const core = require('@actions/core');
-const {GitHub, context} = require('@actions/github');
+const github = require('@actions/github');
 
 async function run() {
     try {
         const tag = core.getInput('tag_name');
-        const github = new GitHub(process.env.GITHUB_TOKEN);
-        const { owner: currentOwner, repo: currentRepo } = context.repo;
+        const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+        const repo = github.context.repo;
 
-        const release = await github.repos.getReleaseByTag({owner, repo, tag});
+        const release = await octokit.repos.getReleaseByTag({...repo, tag});
 
         if (release) {
-            await github.repos.deleteRelease({owner, repo, release_id: release.id});
-            await github.git.deleteRef({owner, repo,ref: 'tags/' + tag});
-
+            await octokit.repos.deleteRelease({...repo, release_id: release.id});
+            await octokit.git.deleteRef({...repo, ref: 'tags/' + tag});
         }
     } catch (error) {
         core.setFailed(error.message);
